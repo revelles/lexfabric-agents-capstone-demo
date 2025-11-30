@@ -1,0 +1,47 @@
+[
+  {
+    "id": "CC02/note.txt",
+    "case_id": "CC02",
+    "relative_path": "CC02/note.txt",
+    "category": "uncategorized",
+    "title": "note",
+    "ext": ".txt",
+    "size_bytes": 21
+  },
+  {
+    "id": "CC02/timeline/01_initial_filing.txt",
+    "case_id": "CC02",
+    "relative_path": "CC02/timeline/01_initial_filing.txt",
+    "category": "timeline",
+    "title": "01_initial_filing",
+    "ext": ".txt",
+    "size_bytes": 21
+  },
+  {
+    "id": "RH10/note.txt",
+    "case_id": "RH10",
+    "relative_path": "RH10/note.txt",
+    "category": "uncategorized",
+    "title": "note",
+    "ext": ".txt",
+    "size_bytes": 21
+  },
+  {
+    "id": "RH10/timeline/01_incident_occurs.txt",
+    "case_id": "RH10",
+    "relative_path": "RH10/timeline/01_incident_occurs.txt",
+    "category": "timeline",
+    "title": "01_incident_occurs",
+    "ext": ".txt",
+    "size_bytes": 25
+  },
+  {
+    "id": "RH10/timeline/02_investigation_opened.txt",
+    "case_id": "RH10",
+    "relative_path": "RH10/timeline/02_investigation_opened.txt",
+    "category": "timeline",
+    "title": "02_investigation_opened",
+    "ext": ".txt",
+    "size_bytes": 30
+  }
+]
