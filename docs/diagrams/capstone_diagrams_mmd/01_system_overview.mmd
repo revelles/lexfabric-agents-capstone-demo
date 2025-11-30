@@ -1,0 +1,48 @@
+graph TD
+    %% Styling
+    classDef navy fill:#1a2332,stroke:#4a90e2,stroke-width:2px,color:white;
+    classDef charcoal fill:#2d3436,stroke:#dfe6e9,stroke-width:1px,color:white;
+
+    %% =========================
+    %% Client Layer
+    %% =========================
+    subgraph Client_Layer ["CLI Interface"]
+        direction TB
+        CLI[User CLI / Terminal]:::charcoal
+    end
+
+    %% =========================
+    %% Logic Layer
+    %% =========================
+    subgraph Logic_Layer ["Multi-Agent Pipeline"]
+        direction TB
+        Router[RouterAgent]:::navy
+        Evidence[EvidenceAgent]:::navy
+        Timeline[TimelineAgent]:::navy
+        QA[QnAAgent]:::navy
+        Memory[MemoryBank]:::navy
+    end
+
+    %% =========================
+    %% Data Layer
+    %% =========================
+    subgraph Data_Layer ["Synthetic Evidence Server (MCP)"]
+        direction TB
+        MCP[MCP Server]:::charcoal
+        DB[(Vector Store / DB)]:::charcoal
+    end
+
+    %% =========================
+    %% Flows
+    %% =========================
+    CLI -->|Commands| Router
+
+    Router --> Evidence
+    Router --> Timeline
+    Router --> QA
+    Router --> Memory
+
+    Evidence -->|Tools: list_evidence, get_text| MCP
+    Timeline -->|Tools: list_evidence, get_text| MCP
+    QA -->|Tools: list_evidence, get_text| MCP
+    MCP <--> DB

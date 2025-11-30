@@ -1,0 +1,20 @@
+classDiagram
+    %% Styling
+    classDef dark fill:#2d3436,stroke:#74b9ff,color:white;
+
+    class SyntheticEvidenceServer {
+        <<MCP Server>>
+        +list_evidence()
+        +get_evidence_text(id)
+        +list_cases()
+        +select_case(case_id)
+        +get_evidence_hashes()
+    }
+    class LexFabricAgents {
+        <<Consumer>>
+        uses tools via stdio
+    }
+
+    LexFabricAgents ..> SyntheticEvidenceServer : Calls
+    class SyntheticEvidenceServer dark
+    class LexFabricAgents dark

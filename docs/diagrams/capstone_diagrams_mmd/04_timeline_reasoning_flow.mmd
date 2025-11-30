@@ -1,0 +1,12 @@
+graph TD
+    %% Styling
+    classDef nodeStyle fill:#2c3e50,stroke:#00d2d3,color:white;
+
+    Ev[Evidence Piece]:::nodeStyle
+    Ext[Extraction: Date + Entity]:::nodeStyle
+    Tick[Timeline Tick Mark]:::nodeStyle
+    Final[Unified Chronological Timeline]:::nodeStyle
+
+    Ev -->|Event Extraction| Ext
+    Ext -->|Normalization| Tick
+    Tick -->|Merge Sort| Final

@@ -1,0 +1,27 @@
+graph LR
+    %% Styling
+    classDef agent fill:#0f3460,stroke:#e94560,stroke-width:2px,color:white;
+    classDef desc fill:#16213e,stroke:none,color:#bdc3c7,font-size:10pt;
+
+    R[Router Agent]:::agent
+    Rdesc("Orchestrates pipeline based on CLI mode"):::desc
+
+    I[Evidence Agent]:::agent
+    Idesc("Load files, categories, metadata"):::desc
+
+    T[Timeline Agent]:::agent
+    Tdesc("Extract dates + events and merge into chronological sequence"):::desc
+
+    Q[Q&A Agent]:::agent
+    Qdesc("Answer questions using memory + timeline search"):::desc
+
+    %% Connections
+    R --> Rdesc
+    R -->|Run Evidence Stage| I
+    I --> Idesc
+
+    I -->|Evidence Records| T
+    T --> Tdesc
+
+    T -->|Unified Timeline + Memory| Q
+    Q --> Qdesc

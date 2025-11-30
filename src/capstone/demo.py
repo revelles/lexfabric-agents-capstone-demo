@@ -11,6 +11,8 @@ from rich.panel import Panel
 from rich.text import Text
 
 from capstone.agents.router import RouterAgent
+from capstone.agents.qa_agent import QnAAgent
+
 
 console = Console()
 
@@ -216,7 +218,7 @@ def run_interactive_demo(
     timeline_summary = router.memory.get("timeline_summary", "(no timeline summary)")
     console.print(timeline_summary)
 
-    # 5) Ask a demo question via QnAAgent
+    # 5) Ask a demo question via QnAAgent (rule-based, no external LLM)
     console.print()
     console.print(Panel.fit(
         "[bold]Q&A (QnAAgent)[/bold]",
@@ -229,7 +231,19 @@ def run_interactive_demo(
         question = "Give me a short, high-level overview of this case based on the evidence and timeline."
 
     console.print(f"[bold]Question:[/bold] {question}\n")
-    answer = router.answer(question)
+
+    # Optional: try to get a hash manifest from the RouterAgent's memory.
+    # If none is present, we fall back to an empty dict.
+    hash_manifest = router.memory.get("hash_manifest", {})
+
+    # Construct the rule-based QnAAgent directly from evidence + timeline.
+    qna = QnAAgent(
+        evidence=evidence_records,
+        timeline=timeline_events,
+        hashes=hash_manifest,
+    )
+
+    answer = qna.answer(question)
     console.print(answer)
 
     console.print("\n[bold green][OK][/bold green] Demo completed.")
