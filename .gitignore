@@ -15,3 +15,5 @@ env/
 # Build artifacts
 dist/
 build/
+-14Sections.md
+.DS_Store
