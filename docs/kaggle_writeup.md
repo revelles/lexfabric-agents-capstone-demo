@@ -16,7 +16,7 @@ This project demonstrates an **end-to-end agentic architecture** capable of:
 
 The dataset, tools, and reasoning system are fully **synthetic** for the purposes of the Google AI Agents Intensive. However, the architecture parallels features used in the private **LexFabric MDLS (Multi-Docket Litigation System)**, a professional evidence automation environment.
 
----
+
 
 ## **2. Problem Addressed**
 
@@ -37,8 +37,10 @@ For example:
 
 Human analysts manually perform these multi-source joins. Our goal is to teach agents to do them reliably.
 
----
 
+### Before/After: Why This Matters
+![LexFabric Split-Screen Demo](/assets/lexfabric-demo-split-screen.png)
+*Figure 1: Traditional manual review vs. LexFabric's multi-agent chronological reconstruction.*
 ## **3. System Architecture**
 
 The solution uses a **three-tier structure**:
@@ -56,7 +58,7 @@ This project is built as a small, self-contained **multi-agent system** with a d
    - walking the ordered timeline for sequence-sensitive queries.
 6. A lightweight **Router** coordinates which agent runs when, based on the CLI mode (`list-evidence`, `list-timeline`, `ask`).
 
----
+
 
 ### Visual Overview
 
@@ -67,7 +69,7 @@ This project is built as a small, self-contained **multi-agent system** with a d
        alt="High-level system overview showing agents interacting with the synthetic evidence server and producing timelines and answers."
        width="80%">
   <figcaption style="font-size:0.6em; margin-top:6px; color:#555;">
-    <strong>Figure 1 — High-level system overview:</strong> Shows agents interacting with the synthetic evidence server and producing timelines and answers.
+    <strong>Figure 2 — High-level system overview:</strong> Shows agents interacting with the synthetic evidence server and producing timelines and answers.
   </figcaption>
 </figure>
 
@@ -78,7 +80,7 @@ This project is built as a small, self-contained **multi-agent system** with a d
        alt="End-to-end multi-agent pipeline: Evidence Agent ingests evidence, Timeline Agent orders events, Memory Bank stores structured fragments, Q&A Agent answers questions, and Router orchestrates the flow."
        width="100%">
   <figcaption style="font-size:0.6em; margin-top:12px; color:#555;">
-    <strong>Figure 2 — End-to-end multi-agent pipeline:</strong>
+    <strong>Figure 3 — End-to-end multi-agent pipeline:</strong>
     Evidence Agent ingests evidence, Timeline Agent orders events,
     Memory Bank stores structured fragments, Q&A Agent answers questions,
     and Router orchestrates the flow.
@@ -97,7 +99,7 @@ This project is built as a small, self-contained **multi-agent system** with a d
   </figcaption>
 </figure>
 
----
+
 
 ### Agents
 
@@ -107,7 +109,7 @@ This project is built as a small, self-contained **multi-agent system** with a d
 - **Memory Bank** – holds normalized fragments (entities, summaries, events).
 - **Router** – orchestrates which agent runs based on the CLI mode.
 
----
+
 
 ### Synthetic Evidence Server
 
@@ -120,7 +122,7 @@ Located in `capstone/synthetic_evidence/`, it supports:
 - `get_evidence_hashes()`
 
 
----
+
 
 ### **3.1 Synthetic Evidence Server (MCP)**
 
@@ -134,7 +136,7 @@ A lightweight MCP server provides deterministic tools:
 
 This ensures **reproducibility**, **testability**, and **safe evaluation**.
 
----
+
 
 ### **3.2 Multi-Agent Reasoning Pipeline**
 
@@ -170,7 +172,7 @@ A grounded, rule-based system (no external API calls) that:
 * provides provenance-backed answers
 * refuses to hallucinate missing information
 
----
+
 
 ### **3.3 CLI Interface**
 
@@ -184,7 +186,7 @@ python -m capstone.demo --case-id CC02 --ask "What happened first?"
 
 This mirrors real-world usage in legal, compliance, and investigative tooling.
 
----
+
 
 ## **4. Evidence Normalization & Hashing**
 
@@ -199,7 +201,7 @@ Benefits:
 
 This mirrors industry requirements for legal review, audit, and regulated domains.
 
----
+
 
 ## **5. Synthetic Case Data**
 
@@ -213,13 +215,13 @@ The repository contains multiple synthetic cases (`CC02` → `RH10`), each with 
 
 This diversity ensures generalization and demonstrates that the pipeline works beyond a single curated example.
 
----
+
 
 ## **6. Example Agent Outputs**
 
 To validate the system, a test harness runs **10 reasoning patterns**, each reflecting a real-world analytical task:
 
----
+
 
 ### **1. Timeline Reconstruction**
 
@@ -228,7 +230,7 @@ To validate the system, a test harness runs **10 reasoning patterns**, each refl
 
 → System identifies earliest timeline entry and its evidence source.
 
----
+
 
 ### **2. Cross-Document Contradiction Detection**
 
@@ -237,7 +239,7 @@ To validate the system, a test harness runs **10 reasoning patterns**, each refl
 
 → System admits when data is missing (no hallucinations).
 
----
+
 
 ### **3. Actor-Centric Narrative**
 
@@ -246,7 +248,7 @@ To validate the system, a test harness runs **10 reasoning patterns**, each refl
 
 → Interval search across timeline events.
 
----
+
 
 ### **4. Missing Information Audit**
 
@@ -256,7 +258,7 @@ Detects entries lacking:
 * ordering certainty
 * links to actors
 
----
+
 
 ### **5. Causal/Procedural Reasoning**
 
@@ -267,7 +269,7 @@ Identifies causal chains such as:
 
 Without inventing facts.
 
----
+
 
 ### **6. Evidence-Grounded 4-Sentence Summary**
 
@@ -277,19 +279,19 @@ Produces a short summary that:
 * references only loaded files
 * clearly states when information is missing
 
----
+
 
 ### **7. Same-Day Event Expansion**
 
 Filters events by date, grouping them for human review.
 
----
+
 
 ### **8. Entity Cross-Section**
 
 Finds all events involving a target role, e.g., “operations manager.”
 
----
+
 
 ### **9. Gap Detection + Next Evidence Recommendations**
 
@@ -299,13 +301,13 @@ Example output:
 * insufficient emails
 * absent follow-up logs
 
----
+
 
 ### **10. Hash-Provenance Display**
 
 Shows each timeline entry with its originating SHA-256 file hash.
 
----
+
 
 ## **7. Key Competition Strengths**
 The following points summarize why this multi-agent architecture performs well under the competition’s evaluation criteria.
@@ -340,7 +342,7 @@ This project is deployable and extendable (LexFabric MDLS-compatible).
 
 Judges can run everything locally in seconds.
 
----
+
 
 ## **8. Future Work**
 
@@ -354,7 +356,7 @@ The next steps for production-level deployment include:
 
 These will be integrated into the private LexFabric MDLS after the Capstone submission.
 
----
+
 
 ## **9. Conclusion**
 
@@ -362,4 +364,3 @@ LexFabric Agents demonstrates how multi-agent systems can reliably transform fra
 
 The system is ready for further extension, commercial deployment, and integration into fully featured litigation automation workflows.
 
----

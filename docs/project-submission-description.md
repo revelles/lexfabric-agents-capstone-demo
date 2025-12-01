@@ -51,7 +51,7 @@ The LLM never infers or invents facts—it converts relative expressions into ex
 
 
 
-## 3 Synthetic Evidence Server
+## 3. Synthetic Evidence Server
 
 Located under `capstone/synthetic_evidence/`, it provides deterministic case files through a simple MCP-style interface. Running entirely offline, it ensures:
 
@@ -60,11 +60,13 @@ Located under `capstone/synthetic_evidence/`, it provides deterministic case fil
 - no API drift  
 - safe experimentation for judges  
 
-This isolates the pipeline from environmental variability.
+This isolates the pipeline from environmental variability. The system performs no network calls and uses no external APIs, ensuring fully offline and reproducible operation.
+
 
 
 
 ## 4. Execution & Reproducibility
+The system is demonstrated using two synthetic cases included in the repository: CC02 and RH10.
 
 Run the system with:
 

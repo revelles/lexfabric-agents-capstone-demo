@@ -33,3 +33,14 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 ### Notes
 - This release uses **synthetic evidence only**.
 - Private LexFabric MDLS features will ship in later tagged versions.
+
+## [1.0.1] - 2025-12-01
+
+### Added
+- Split-screen demo image `assets/lexfabric-demo-split-screen.png` illustrating fragmented evidence vs. ordered LexFabric chronology.
+
+### Changed
+- Updated `README.md` with a visual summary of the end-to-end pipeline.
+- Updated `docs/kaggle_writeup.md` to include the split-screen graphic for Kaggle judges.
+- Updated `docs/whitepaper.md` with the split-screen graphic and inline architecture diagrams to clarify the system design.
+

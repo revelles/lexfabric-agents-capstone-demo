@@ -3,7 +3,7 @@
 ### Demonstration White Paper – Google AI Agents Intensive (Nov 2025)  
 _All evidence used in this demo is fully synthetic._
 
----
+
 
 # Executive Summary
 
@@ -21,7 +21,7 @@ LexFabric Agents solves this by decomposing the reasoning pipeline into speciali
 
 This white paper documents the architecture, algorithms, constraints, and design philosophy underlying the synthetic demonstration system.
 
----
+
 
 # 1. Problem Motivation
 
@@ -56,7 +56,11 @@ General-purpose LLMs exhibit known limitations:
 
 Thus, the system design centers on **agent specialization**, **deterministic behavior**, and **tool-based grounding**.
 
----
+### Before and After: Fragmented Evidence vs. LexFabric Chronology
+
+![LexFabric Split-Screen Demo](../assets/lexfabric-demo-split-screen.png)
+
+*Figure 1 — On the left: real-world evidence arrives scattered across PDFs, emails, notes, and mismatched timestamps. On the right: LexFabric’s multi-agent pipeline produces a clean, ordered, hash-verified chronology in seconds.*
 
 # 2. System Overview
 
@@ -70,11 +74,40 @@ Evidence Agent → Analysis Agent → Timeline Agent → Q&A Agent
 ↓               ↑
 Memory Bank ←––––––––––
 
-````
+```
 
 Each agent is narrow, deterministic, and operates under explicit grounding rules.
 
----
+### System Overview
+
+![System Overview](diagrams/01_system_overview.svg)
+
+*Figure 2 — High-level architecture of LexFabric Agents, showing how ingestion, memory, agents, and outputs connect.*
+
+
+### Multi-Agent Processing Pipeline
+
+![Multi-Agent Pipeline](diagrams/02_multi_agent_pipeline.svg)
+
+*Figure 3 — The multi-agent Evidence → Timeline → Q&A pipeline, with deterministic routing and isolated responsibilities.*
+
+
+### MCP Tooling and Evidence Server Interface
+
+![MCP Tooling Class Diagram](diagrams/03_mcp_tooling_class_diagram.svg)
+
+*Figure 4 — Class-level view of the Synthetic Evidence Server tools and how agents access structured evidence.*
+
+
+### Timeline Reasoning Flow
+
+![Timeline Reasoning Flow](diagrams/04_timeline_reasoning_flow.svg)
+
+*Figure 5 — The deterministic timeline construction pipeline: extraction, normalization, merge-sorting, and provenance hashing.*
+
+
+
+
 
 # 3. Agent Descriptions
 
@@ -95,7 +128,7 @@ Design constraints:
 - Pure retrieval semantics  
 - Stable file paths and hashes  
 
----
+
 
 ## 3.2 Analysis Agent — Extraction & Atomic Event Generation
 
@@ -120,7 +153,7 @@ Output fragment:
 
 No legal conclusions; only factual extraction.
 
----
+
 
 ## 3.3 Timeline Agent — Ordering & Temporal Reconciliation
 
@@ -144,7 +177,7 @@ Process:
 
 The result is a reproducible, ordered timeline.
 
----
+
 
 ## 3.4 Q&A Agent — Grounded Natural-Language Answers
 
@@ -163,7 +196,7 @@ Example query:
 
 The agent identifies the earliest timestamped “outage report” event and cites its source.
 
----
+
 
 ## 3.5 Memory Bank — Canonical Shared Store
 
@@ -176,7 +209,7 @@ The Memory Bank contains:
 
 It provides global consistency across the agent pipeline.
 
----
+
 
 # 4. Synthetic Evidence Environment
 
@@ -198,7 +231,7 @@ Categories include:
 
 This provides a realistic but risk-free sandbox for evaluating timeline reasoning.
 
----
+
 
 # 5. Demonstration CLI
 
@@ -208,7 +241,7 @@ The included CLI illustrates end-to-end behavior via tool calls.
 
 ```bash
 python -m capstone.demo --root capstone/synthetic_evidence --case-id CC02
-````
+```
 
 Example output:
 
@@ -239,7 +272,7 @@ Outputs:
 
 The Q&A agent returns the grounded answer plus source references.
 
----
+
 
 # 6. Technical Architecture
 
@@ -264,7 +297,7 @@ The controller orchestrates:
 
 It enforces the rules that make the system reproducible and auditable.
 
----
+
 
 # 7. Algorithms & Methods
 
@@ -292,7 +325,7 @@ Steps:
 * actor normalization
 * citation-based answers
 
----
+
 
 # 8. Evaluation
 
@@ -307,7 +340,7 @@ The system is evaluated on:
 Summary table:
 
 | Capability               | Result |
-| ------------------------ | ------ |
+|  |  |
 | Relative date resolution | Passed |
 | Multi-source synthesis   | Passed |
 | Deterministic outputs    | Passed |
@@ -315,7 +348,7 @@ Summary table:
 | Provenance tracking      | Passed |
 | Hallucination prevention | Passed |
 
----
+
 
 # 9. Real-World Analogs & Applications
 
@@ -348,7 +381,7 @@ Although the demo uses synthetic data, it maps to multiple real domains.
 
 * clinical event timelines
 
----
+
 
 # 10. Safety, Constraints & Design Boundaries
 
@@ -363,7 +396,7 @@ This demo enforces:
 
 It demonstrates responsible agentic design for evidence-heavy domains.
 
----
+
 
 # 11. Lessons Learned
 
@@ -373,7 +406,7 @@ It demonstrates responsible agentic design for evidence-heavy domains.
 4. Synthetic data offers a safe experimentation testbed.
 5. Memory Bank normalization prevents drift across multi-document reasoning.
 
----
+
 
 # 12. Future Work
 
@@ -386,7 +419,7 @@ Planned extensions:
 * uncertainty quantification
 * advanced conflict reconciliation
 
----
+
 
 # 13. Open-Source Release
 
@@ -400,7 +433,7 @@ The project includes:
 * Release notes
 * Kaggle writeup
 
----
+
 
 # 14. Conclusion
 

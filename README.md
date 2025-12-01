@@ -13,6 +13,10 @@ This project is a **multi-agent evidence and timeline reasoning system** demonst
 
 All evidence is **fully synthetic**.
 
+## Visual Summary: From Fragmented Evidence to Ordered Chronology
+![LexFabric Split-Screen Demo](/assets/lexfabric-demo-split-screen.png)
+*Figure 1: Traditional manual review vs. LexFabric's multi-agent chronological reconstruction.*
+
 ## 🧱 Architecture
 
 This project is built as a small, self-contained **multi-agent system** with a deterministic, evidence-bound pipeline:
@@ -37,7 +41,7 @@ This project is built as a small, self-contained **multi-agent system** with a d
        alt="High-level system overview showing agents interacting with the synthetic evidence server and producing timelines and answers."
        width="80%">
   <figcaption style="font-size:0.6em; margin-top:6px; color:#555;">
-    <strong>Figure 1 — High-level system overview:</strong> Shows agents interacting with the synthetic evidence server and producing timelines and answers.
+    <strong>Figure 2 — High-level system overview:</strong> Shows agents interacting with the synthetic evidence server and producing timelines and answers.
   </figcaption>
 </figure>
 
@@ -48,7 +52,7 @@ This project is built as a small, self-contained **multi-agent system** with a d
        alt="End-to-end multi-agent pipeline: Evidence Agent ingests evidence, Timeline Agent orders events, Memory Bank stores structured fragments, Q&A Agent answers questions, and Router orchestrates the flow."
        width="100%">
   <figcaption style="font-size:0.6em; margin-top:12px; color:#555;">
-    <strong>Figure 2 — End-to-end multi-agent pipeline:</strong>
+    <strong>Figure 3 — End-to-end multi-agent pipeline:</strong>
     Evidence Agent ingests evidence, Timeline Agent orders events,
     Memory Bank stores structured fragments, Q&A Agent answers questions,
     and Router orchestrates the flow.
@@ -62,7 +66,7 @@ This project is built as a small, self-contained **multi-agent system** with a d
        alt="Diagram showing how raw evidence is converted into normalized events and an ordered timeline, which is then queried by the Q&A Agent."
        width="45%">
   <figcaption style="font-size:0.6em; margin-top:12px; color:#555;">
-    <strong>Figure 3 — Timeline Reasoning:</strong>
+    <strong>Figure 4 — Timeline Reasoning:</strong>
     Diagram showing how raw evidence is converted into normalized events and an ordered timeline, which is then queried by the Q&A Agent.
   </figcaption>
 </figure>

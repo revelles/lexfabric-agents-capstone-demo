@@ -4,7 +4,7 @@ Released: 2025-11-29
 
 This is the first public release of the multi-agent evidence and timeline analysis system built for the Google AI Agents Intensive (Nov 2025). It demonstrates how agentic workflows can ingest synthetic legal evidence, build chronological timelines, and answer questions through a structured memory system.
 
----
+
 
 ## 🚀 Key Features
 
@@ -37,3 +37,9 @@ Use:
 python -m capstone.demo --mode list-evidence --case-id CC02
 python -m capstone.demo --mode list-timeline --case-id CC02
 python -m capstone.demo --mode ask --query "What happened after the email?"
+```
+
+## Visuals Update – 1.0.1 (2025-12-01)
+
+- Added `assets/lexfabric-demo-split-screen.png`, a split-screen visual showing fragmented evidence on the left and the ordered LexFabric timeline on the right.
+- Updated README, Kaggle writeup, and whitepaper to reference this visual and clarify the before/after impact of the multi-agent pipeline.
