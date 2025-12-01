@@ -17,6 +17,12 @@ All evidence is **fully synthetic**.
 ![LexFabric Split-Screen Demo](/assets/lexfabric-demo-split-screen.png)
 *Figure 1: Traditional manual review vs. LexFabric's multi-agent chronological reconstruction.*
 
+## 🎥 Capstone Demo Video (2:58)
+
+Watch the official Kaggle demo video on YouTube:  
+👉 https://youtu.be/c4q6CFecvu4
+
+
 ## 🧱 Architecture
 
 This project is built as a small, self-contained **multi-agent system** with a deterministic, evidence-bound pipeline:
