@@ -1,0 +1,44 @@
+What is the primary function of the LexFabric Agents project?,"It is a multi-agent evidence and timeline reasoning system that ingests synthetic evidence, constructs a timeline, and answers questions."
+"The LexFabric Agents project is built with a deterministic, evidence-_____ pipeline.",bound
+What is the nature of all evidence used by the LexFabric Agents system for the Capstone demo?,All evidence is fully synthetic.
+Which component in the architecture is responsible for exposing synthetic cases and evidence files via simple tools?,The Synthetic Evidence Server.
+What is the specific role of the Evidence Agent in the pipeline?,It loads evidence metadata and raw text from the synthetic evidence server.
+"Which agent is responsible for extracting dates and events to build a structured, ordered narrative?",The Timeline Agent.
+"Where does the system store normalized fragments like entities, dates, summaries, and events for retrieval?",In the Memory Bank.
+How does the Q&A Agent answer user questions to ensure its responses are grounded?,By searching the memory bank and walking the ordered timeline for sequence-sensitive queries.
+What is the function of the lightweight Router in the LexFabric system?,"It coordinates which agent runs when, based on the CLI mode (e.g., list-evidence, ask)."
+"What core challenge, common in legal and investigative workflows, does the LexFabric system address?","Reconstructing coherent, chronological timelines from dozens or hundreds of fragmented artifacts that arrive out of order."
+What specific hashing algorithm is used throughout the pipeline to ensure reproducibility and integrity?,SHA-256.
+Name one key benefit of using a SHA-256 hash manifest for all ingested files.,"It ensures chain-of-custody fidelity, version reproducibility, deduplication, or test-stable evaluation."
+What is the term for the design principle that ensures all reasoning is grounded purely in the ingested files?,Evidence-bound reasoning.
+"As a safety feature, the system is designed for offline execution. Why is this important?","It prevents external data leakage and ensures a controlled, reproducible environment."
+What does the `list_cases()` tool on the Synthetic Evidence Server do?,"It lists all available synthetic cases, such as CC02 and RH10."
+Which tool is used to retrieve the raw content of a specific evidence file from the server?,The `get_evidence_text()` tool.
+What information does the `get_evidence_hashes()` tool provide?,It produces a SHA-256 manifest for the evidence files in a case.
+For what event was the LexFabric Agents Capstone Demo created?,The Google AI Agents Intensive (2025).
+"The private, professional system that will extend the capstone project's foundation is named the LexFabric _____.",MDLS (Multi-Docket Litigation System)
+Identifying the earliest event in a case and its source file is an example of what reasoning pattern?,Timeline Reconstruction.
+What is the goal of the 'Cross-Document Contradiction Detection' reasoning pattern?,To find conflicting information between different pieces of evidence.
+"An 'Actor-Centric Narrative' query, such as asking what a claimant did in a date range, performs what kind of search across the timeline?",An interval search.
+The 'Causal/Procedural Reasoning' pattern aims to identify chains of events without doing what?,Inventing facts or hallucinating information.
+The 'Hash-Provenance Display' test shows each timeline entry along with what piece of associated data?,Its originating SHA-256 file hash.
+"The system's design with specialized agents, each having clear and non-overlapping responsibilities, is described as a strong _____-agent design.",multi
+How does the combination of synthetic evidence and a hash manifest contribute to the project's evaluation?,It allows for deterministic and perfectly reproducible evaluation.
+How is the Q&A Agent specifically designed to prevent hallucination?,It is a rule-based system that explicitly refuses to invent information and states when data is missing.
+The Router coordinates agents based on the CLI mode. Name the three modes mentioned.,"The modes are list-evidence, list-timeline, and ask."
+"The repository contains multiple synthetic cases, such as CC02 and _____, to ensure the system generalizes.",RH10
+Name two types of synthetic evidence files included in the cases to demonstrate the system's versatility.,"Emails, notes, filings, incident reports, or timeline fragments."
+"In the Kaggle writeup's detailed breakdown, which agent extracts actor names, pulls date fragments, and derives event summaries?",The Analysis Agent.
+"Beyond sorting events, what does the Timeline Agent mark on entries to reflect ambiguity?",It marks uncertainty.
+"The 'Kaggle Writeup' claims the project has clear _____-world value, a key strength in the competition.",real
+"The system's core function is to transform raw, fragmented files into a _____ narrative.",chronological
+For what type of queries does the Q&A agent need to 'walk the ordered timeline'?,Sequence-sensitive queries.
+"The Kaggle writeup states that while LLMs excel at summarizing single documents, they struggle with _____ events across multiple files.",ordering
+Term: Provenance,"The ability to trace facts, events, or information back to their original source document."
+"The Kaggle writeup describes the Q&A agent as a grounded, rule-based system with what constraint on its operations?",It makes no external API calls.
+What is an example of an insight the 'Gap Detection' reasoning pattern might produce?,"It can identify missing timestamps, insufficient emails, or absent follow-up logs."
+What is the first future work item listed for the production-level deployment of LexFabric Agents?,Semantic embedding indexing.
+"The project's architecture parallels features used in what private, professional evidence automation environment?",The LexFabric MDLS (Multi-Docket Litigation System).
+"To validate the system, a test harness runs how many distinct, real-world reasoning patterns?",10 reasoning patterns.
+The 'Evidence-Grounded 4-Sentence Summary' must contain zero _____ and reference only loaded files.,hallucinations
+What does the 'Entity Cross-Section' reasoning pattern find?,"It finds all events involving a target role or entity, such as 'operations manager'."

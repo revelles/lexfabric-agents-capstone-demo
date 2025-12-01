@@ -1,32 +1,39 @@
-# Capstone Video Script (Under 3 Minutes)
-
 Hi, I’m Francisco Revelles, and this is my Capstone project for the Google AI Agents Intensive.
 
-I built a multi-agent system that reads synthetic legal evidence, generates timelines, and answers questions about what happened in a case.
+I built a multi-agent system that reads synthetic legal evidence, generates timelines, and answers grounded questions about what happened in a case.
 
-The goal is simple: legal analysis is hard because evidence is scattered across filings, emails, notes, and messages. Agents are great at reading text, but they need structure. So I created a pipeline that transforms raw files into a clean, chronological narrative.
+The core problem is that evidence is fragmented across filings, emails, notes, and incident logs. Reconstructing a sequence of events is slow and error-prone. Agents are good at interpreting text, but they need structure—so I built a pipeline that transforms raw files into a chronological narrative.
 
-Let me show you how it works.
+Here’s how it works.
 
-First, there’s an MCP server called the Synthetic Evidence Server. It lists evidence files, returns the text of each file, and provides reproducible SHA-256 hashes so everything is deterministic.
+The system starts with the Synthetic Evidence Server.
+It lists synthetic evidence files, returns their text, and provides SHA-256 hashes for reproducible, deterministic runs.
 
-Next, I have four agents: an Ingest Agent, an Analysis Agent, a Timeline Agent, and a Q&A Agent.
+On top of that, the system uses several narrowly scoped agents:
 
-The Ingest Agent retrieves the evidence and normalizes it.  
-The Analysis Agent extracts dates, actors, and key events.  
-The Timeline Agent merges these fragments into an ordered sequence.  
-And the Q&A Agent answers questions by looking at both the memory bank and the timeline.
+The Evidence Agent loads evidence records and raw text from the synthetic evidence server.
 
-To demonstrate all of this, I built a simple CLI interface.
+The Timeline Agent extracts event fragments, identifies dates, and builds an ordered timeline.
 
-You can list evidence, view the timeline, and ask questions like:  
-“What happened after the February 4 email?”  
-The system pulls from multiple agents to produce a clean answer.
+The Memory Bank stores normalized entities, summaries, and events so agents can retrieve consistent information during reasoning.
 
-The entire project uses only synthetic cases—no personal or real evidence.
+The Q&A Agent answers natural-language questions by combining memory lookups with timeline traversal—grounded strictly in the loaded evidence.
 
-Finally, everything is contained in a deterministic pipeline so results are reproducible. This is essential in legal and compliance workflows.
+And the Router orchestrates which agent runs based on the CLI mode, whether you’re listing evidence, building the timeline, or asking a question.
 
-In the future, this foundation will be extended into the private LexFabric MDLS version, where it will connect with Alfresco, Notion, and multi-docket litigation workflows.
+To demonstrate all of this, I built a small CLI interface.
 
-Thank you for watching, and I hope you enjoy the demo.
+You can load a synthetic case, view all evidence, generate the timeline, and ask questions like:
+“What happened first?”
+or
+“What event occurred after the initial note?”
+
+The system walks the timeline and the memory bank to produce an answer tied directly to evidence—never hallucinated.
+
+The entire dataset is 100% synthetic for the Capstone and safe for public demonstration.
+
+Everything runs offline, using a deterministic pipeline with SHA-256 hashing. This is essential for legal, compliance, and investigative workflows where reproducibility and provenance matter.
+
+In the future, this foundation will expand into the private LexFabric MDLS, where it will support multi-docket reasoning, Alfresco integration, and more sophisticated evidence workflows.
+
+Thanks for watching, and I hope you enjoy the demo.

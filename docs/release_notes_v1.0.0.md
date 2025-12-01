@@ -9,10 +9,12 @@ This is the first public release of the multi-agent evidence and timeline analys
 ## 🚀 Key Features
 
 ### Multi-Agent Architecture
-- **Ingest Agent** for loading evidence and metadata  
-- **Analysis Agent** for extracting actors, dates, events  
-- **Timeline Agent** for merging fragments into ordered records  
-- **Q&A Agent** for hybrid timeline + memory search  
+- **Evidence Agent** – loads evidence records and raw text.
+- **Timeline Agent** – extracts events and dates, then builds an ordered timeline.
+- **Q&A Agent** – answers questions grounded in memory + timeline.
+- **Memory Bank** – holds normalized fragments (entities, summaries, events).
+- **Router** – orchestrates which agent runs based on the CLI mode.
+
 
 ### Synthetic Evidence Server (MCP)
 Provides:
