@@ -10,11 +10,29 @@ from rich.table import Table
 from rich.panel import Panel
 from rich.text import Text
 
-from capstone.agents.router import RouterAgent
-from capstone.agents.qa_agent import QnAAgent
+from pathlib import Path
+from typing import Any, Dict, List, Optional
 
+from rich.console import Console
+
+# Try to import the real multi-agent Router; fall back gracefully if not available
+try:
+    from .agents.router import RouterAgent  # adjust to your actual class name
+    HAS_ROUTER = True
+except Exception:
+    RouterAgent = None  # type: ignore
+    HAS_ROUTER = False
+
+# Try to import QnAAgent; fall back if not needed yet
+try:
+    from .agents.qa_agent import QnAAgent  # relative import
+    HAS_QA = True
+except Exception:
+    QnAAgent = None  # type: ignore
+    HAS_QA = False
 
 console = Console()
+
 
 
 @dataclass
@@ -24,9 +42,7 @@ class CaseChoice:
     path: Path
     description: str = ""
 
-
 # --- Filesystem-based discovery ---------------------------------------------
-
 
 def discover_cases(root: Path) -> List[CaseChoice]:
     """
@@ -281,6 +297,114 @@ def main() -> None:
         case_id=args.case_id,
         ask=args.ask,
     )
+    
+from pathlib import Path
+from typing import Any, Dict, List, Optional
+
+# If you have a Router or similar orchestrator, import it here.
+# Adjust this import to match your actual code if needed.
+try:
+    from .agents.router import Router  # type: ignore
+    HAS_ROUTER = True
+except ImportError:
+    HAS_ROUTER = False
+
+
+def _get_project_root() -> Path:
+    """
+    Resolve the project root from this file.
+
+    demo.py is at:   src/capstone/demo.py
+    project root is: repo root (two levels up from src)
+    """
+    return Path(__file__).resolve().parents[2]
+
+
+def _get_evidence_root() -> Path:
+    """
+    Points to: <repo-root>/capstone/synthetic_evidence
+    """
+    return _get_project_root() / "capstone" / "synthetic_evidence"
+
+
+def _build_naive_timeline(case_id: str) -> List[Dict[str, str]]:
+    """
+    Minimal deterministic timeline from the synthetic text files,
+    used as a fallback if we don't (yet) wire the real agents.
+    """
+    evidence_root = _get_evidence_root()
+    case_dir = evidence_root / case_id / "timeline"
+
+    if not case_dir.exists():
+        raise FileNotFoundError(f"Timeline folder not found for case {case_id}: {case_dir}")
+
+    events: List[Dict[str, str]] = []
+
+    for txt_file in sorted(case_dir.glob("*.txt")):
+        content = txt_file.read_text(encoding="utf-8").strip()
+        events.append({
+            "date": txt_file.stem,   # e.g. "01_initial_filing"
+            "event": content,
+        })
+
+    return events
+
+
+def analyze_case(case_id: str, user_query: Optional[str] = None) -> Dict[str, Any]:
+    """
+    Refactored entry point for API usage.
+    Returns a structured dictionary; NO prints, only data.
+
+    It tries to use your Router (if present), otherwise falls back to
+    a deterministic filesystem-based timeline using the synthetic evidence.
+    """
+    evidence_root = _get_evidence_root()
+    case_dir = evidence_root / case_id
+
+    if not case_dir.exists():
+        raise FileNotFoundError(f"Case {case_id} not found in synthetic store: {case_dir}")
+
+    results: Dict[str, Any] = {
+        "case_id": case_id,
+        "status": "success",
+        "steps": [],
+        "timeline": [],
+        "final_answer": None,
+    }
+
+    results["steps"].append(f"Resolved project root at: {_get_project_root()}")
+    results["steps"].append(f"Using evidence root: {evidence_root}")
+    results["steps"].append(f"Found case directory: {case_dir}")
+
+    # --- Preferred path: use your real multi-agent Router if available ---
+    if HAS_ROUTER:
+        # ⚠️ Adjust this block to match your actual Router API.
+        # This is a placeholder pattern – you’ll plug in the true call signature.
+        router = Router(evidence_root=str(evidence_root))
+
+        # Example signatures you might adapt:
+        #   router_result = router.run(case_id=case_id, query=user_query)
+        # or router_result = router.process(case_id, user_query)
+        #
+        # For now, we just call a hypothetical method and expect a dict-like result.
+        router_result = router.run(case_id=case_id, query=user_query)  # <-- adjust to your real method
+
+        # You can shape this however your Router returns data.
+        # Here we just assume it already returns a dictionary in the right format.
+        return router_result
+
+    # --- Fallback path: no Router wired yet, build a simple timeline from files ---
+    timeline = _build_naive_timeline(case_id)
+    results["timeline"] = timeline
+    results["steps"].append(f"Timeline built from {len(timeline)} event file(s)")
+
+    if user_query:
+        # Placeholder: you can later hook this into qa_agent.ask(...)
+        results["steps"].append(f"Query received but QA agent not yet wired: {user_query}")
+        results["final_answer"] = None
+
+    return results
+
 
 
 if __name__ == "__main__":
