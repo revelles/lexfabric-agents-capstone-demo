@@ -17,3 +17,5 @@ dist/
 build/
 -14Sections.md
 .DS_Store
+*.pdf
+docs/scratch.md
